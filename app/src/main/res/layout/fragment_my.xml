@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="com.zhenhui.apps.toptop.model.User" />
+
+        <variable
+            name="user"
+            type="User" />
+
+        <variable
+            name="event"
+            type="com.zhenhui.apps.toptop.modules.my.MyFragment.EventListener" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/my_root_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.zhenhui.apps.toptop.modules.my.MyFragment">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintLeft_toLeftOf="@+id/my_root_layout"
+            app:layout_constraintRight_toRightOf="@+id/my_root_layout"
+            app:layout_constraintTop_toTopOf="@+id/my_root_layout">
+
+            <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+                android:id="@+id/avatarImageView"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="20dp"
+                android:tint="@color/white"
+                android:background="@drawable/ripple_background"
+                android:onClick="@{event.onAuthClick}"
+                app:qmui_border_width="2dp"
+                app:qmui_border_color="@color/colorPrimaryLight"
+                app:url="@{user.id > 0 ? user.avatar : null}"
+                app:placeholder="@{@drawable/ic_default_avatar}"
+                app:error="@{@drawable/ic_default_avatar}"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/avatarImageView"
+                android:layout_toRightOf="@+id/avatarImageView"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/loginTitleView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{event.onAuthClick}"
+                    android:text="@{user.id > 0 ? user.name : @string/click_to_login}"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/loginSubtitleView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{event.onAuthClick}"
+                    android:text="@{user.id > 0 ?  @string/profile : @string/login_to_user_more_function}"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/loginChevronRight"
+                android:layout_width="32dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:scaleType="centerInside"
+                android:onClick="@{event.onAuthClick}"
+                android:background="@drawable/ripple_background"
+                android:src="@drawable/ic_chevron_right_48dp"
+                android:tint="@color/white" />
+
+        </RelativeLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
+

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">TopTop</string>
+
+    <string name="nav_title_home">首页</string>
+    <string name="nav_title_videos">视频</string>
+    <string name="nav_title_welfare">美图</string>
+    <string name="nav_title_my">我的</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="click_to_login">点击登录</string>
+    <string name="profile">个人资料</string>
+    <string name="login_to_user_more_function">体验TopTop更多功能</string>
+</resources>
