@@ -29,7 +29,8 @@ public class JSONUtil {
         try {
             return DEFAULT_MAPPER.readValue(jsonString, clazz);
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            // ignore
         }
 
         return null;
@@ -39,7 +40,7 @@ public class JSONUtil {
         try {
             return DEFAULT_MAPPER.readValue(jsonString, typeReference);
         } catch (Exception e) {
-            e.printStackTrace();
+            // ignore
         }
 
         return null;
@@ -49,7 +50,8 @@ public class JSONUtil {
         try {
             return DEFAULT_MAPPER.writeValueAsString(object);
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            // ignore
         }
 
         return "{}";

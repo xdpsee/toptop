@@ -20,6 +20,8 @@ public class HomeFragment extends Fragment implements HomeView {
 
     private ContentFragmentAdapter contentFragmentAdapter;
 
+    private FragmentHomeBinding mDataBinding;
+
     public HomeFragment() {
 
     }
@@ -35,6 +37,7 @@ public class HomeFragment extends Fragment implements HomeView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        mDataBinding = DataBindingUtil.bind(view);
         return view;
     }
 
@@ -43,13 +46,12 @@ public class HomeFragment extends Fragment implements HomeView {
 
         super.onViewCreated(view, savedInstanceState);
 
-        FragmentHomeBinding binding = DataBindingUtil.bind(view);
 
         contentFragmentAdapter = new ContentFragmentAdapter(getChildFragmentManager());
 
-        binding.setPaddingTop(QMUIStatusBarHelper.getStatusbarHeight(getActivity()));
-        binding.viewPager.setAdapter(contentFragmentAdapter);
-        binding.tabLayout.setViewPager(binding.viewPager);
+        mDataBinding.setPaddingTop(QMUIStatusBarHelper.getStatusbarHeight(getActivity()));
+        mDataBinding.viewPager.setAdapter(contentFragmentAdapter);
+        mDataBinding.tabLayout.setViewPager(mDataBinding.viewPager);
 
     }
 

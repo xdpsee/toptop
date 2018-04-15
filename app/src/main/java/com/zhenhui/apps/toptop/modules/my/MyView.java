@@ -4,6 +4,6 @@ import com.zhenhui.apps.toptop.model.User;
 
 public interface MyView {
 
-    void resetUserInfo(User user);
+    void renderUserInfo(User user);
 
 }

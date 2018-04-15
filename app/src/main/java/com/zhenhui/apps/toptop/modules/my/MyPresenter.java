@@ -1,5 +1,7 @@
 package com.zhenhui.apps.toptop.modules.my;
 
+import com.zhenhui.apps.toptop.data.api.ApiServiceModule;
+import com.zhenhui.apps.toptop.model.UserSetting;
 import com.zhenhui.apps.toptop.modules.app.AppComponent;
 import com.zhenhui.apps.toptop.model.Result;
 import com.zhenhui.apps.toptop.model.User;
@@ -23,8 +25,8 @@ public class MyPresenter {
         this.appComponent = appComponent;
     }
 
-    public void reloadUserInfo() {
-
+    public void reloadUserInfo(final String token) {
+        ApiServiceModule.TOKEN = token;
         appComponent.getUserService().getUserInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -41,7 +43,8 @@ public class MyPresenter {
 
                     @Override
                     public void onNext(Result<User> result) {
-                        mView.resetUserInfo(result.getData());
+                        appComponent.getUserSetting().saveUser(token, result.getData());
+                        mView.renderUserInfo(result.getData());
                     }
                 });
 

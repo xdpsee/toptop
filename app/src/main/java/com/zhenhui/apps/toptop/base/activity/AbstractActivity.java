@@ -15,8 +15,8 @@ public abstract class AbstractActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        QMUIStatusBarHelper.translucent(this);
         QMUIStatusBarHelper.setStatusBarDarkMode(this);
+        QMUIStatusBarHelper.translucent(this);
         setupActivityComponent(AppApplication.get(this).getAppComponent());
     }
 

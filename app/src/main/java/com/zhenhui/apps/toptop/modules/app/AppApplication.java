@@ -28,14 +28,12 @@ public class AppApplication extends Application {
                 .build();
 
         UserSetting setting = appComponent.getUserSetting();
-        ApiServiceModule.TOKEN = setting.getToken();
+        ApiServiceModule.TOKEN = setting.currToken();
 
         Toasty.Config.getInstance()
                 .setTextColor(Color.GREEN)
                 .apply();
-
     }
-
 
     public AppComponent getAppComponent() {
         return appComponent;

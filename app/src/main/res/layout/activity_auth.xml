@@ -1,32 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="event"
-            type="com.zhenhui.apps.toptop.modules.user.boot.AuthActivity.EventListener"/>
+            type="com.zhenhui.apps.toptop.modules.user.boot.AuthActivity.EventListener" />
+
         <variable
             name="paddingTop"
-            type="java.lang.Integer"/>
+            type="java.lang.Integer" />
 
     </data>
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+
+    <android.support.constraint.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/auth_root_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="16sp"
         android:paddingTop="@{paddingTop}"
         tools:context="com.zhenhui.apps.toptop.modules.user.boot.AuthActivity">
+
         <ImageView
             android:id="@+id/buttonBack"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:background="@drawable/ripple_background"
+            android:onClick="@{event.onBack}"
             android:scaleType="centerInside"
             android:src="@drawable/ic_chevron_left_48dp"
             android:tint="@color/colorAccent"
-            android:background="@drawable/ripple_background"
-            android:onClick="@{event.onBack}"
             app:layout_constraintLeft_toLeftOf="@+id/auth_root_layout"
             app:layout_constraintTop_toTopOf="@+id/auth_root_layout" />
 
@@ -37,12 +41,14 @@
             android:layout_margin="20dp"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/buttonBack">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="注册登录"
                 android:textColor="@android:color/primary_text_light"
                 android:textSize="20sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,7 +61,7 @@
             android:id="@+id/ll_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="16dp"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/ll_auth">
 
@@ -65,9 +71,9 @@
                 android:layout_height="32dp"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:inputType="phone"
                 android:background="@android:color/transparent"
                 android:hint="输入手机号码"
+                android:inputType="phone"
                 android:textSize="14sp" />
 
             <ImageView
@@ -75,12 +81,12 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/ripple_background"
-                android:tint="@color/colorAccent"
-                android:src="@drawable/ic_arrow_right"
-                android:onClick="@{event.onTestPhone}"
                 android:clickable="true"
                 android:focusable="true"
-                android:scaleType="centerInside" />
+                android:onClick="@{event.onTestPhone}"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_arrow_right"
+                android:tint="@color/colorAccent" />
         </LinearLayout>
 
         <View
@@ -108,8 +114,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="快速登录"
-            android:textSize="12sp"
             android:textColor="@android:color/darker_gray"
+            android:textSize="12sp"
             app:layout_constraintLeft_toLeftOf="@+id/auth_root_layout"
             app:layout_constraintRight_toRightOf="@+id/auth_root_layout"
             app:layout_constraintTop_toBottomOf="@+id/buttonConfirm" />
@@ -118,41 +124,46 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:orientation="horizontal"
             app:layout_constraintLeft_toLeftOf="@+id/auth_root_layout"
             app:layout_constraintRight_toRightOf="@+id/auth_root_layout"
-            app:layout_constraintTop_toBottomOf="@+id/tv_rapid_login"
-            android:orientation="horizontal">
+            app:layout_constraintTop_toBottomOf="@+id/tv_rapid_login">
+
             <ImageView
                 android:id="@+id/buttonWechatAuth"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:background="@drawable/ripple_background"
                 android:scaleType="centerInside"
-                android:tint="@color/colorAccent"
                 android:src="@drawable/ic_wechat"
-                android:background="@drawable/ripple_background" />
+                android:tint="@color/colorAccent" />
+
             <android.support.v4.widget.Space
                 android:layout_width="40dp"
                 android:layout_height="match_parent" />
+
             <ImageView
                 android:id="@+id/buttonQQAuth"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:background="@drawable/ripple_background"
                 android:scaleType="centerInside"
-                android:tint="@color/colorAccent"
                 android:src="@drawable/ic_qq"
-                android:background="@drawable/ripple_background" />
+                android:tint="@color/colorAccent" />
+
             <android.support.v4.widget.Space
                 android:layout_width="40dp"
                 android:layout_height="match_parent" />
+
             <ImageView
                 android:id="@+id/buttonWeiboAuth"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:scaleType="centerInside"
-                android:tint="@color/colorAccent"
-                android:src="@drawable/ic_weibo"
+                android:background="@drawable/ripple_background"
                 android:onClick="@{event.onAttemptLoginWeibo}"
-                android:background="@drawable/ripple_background" />
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_weibo"
+                android:tint="@color/colorAccent" />
         </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>

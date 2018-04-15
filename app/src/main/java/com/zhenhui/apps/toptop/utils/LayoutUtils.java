@@ -18,13 +18,18 @@ public class LayoutUtils {
 
     @BindingAdapter("android:paddingTop")
     public static void adjustTopPadding(View view, int topPadding) {
+
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-        layoutParams.height += topPadding;
-        view.setLayoutParams(layoutParams);
+        if (layoutParams.height > 0) {
+            layoutParams.height += topPadding;
+            view.setLayoutParams(layoutParams);
+        }
+
         view.setPadding(view.getPaddingLeft()
                 , topPadding
                 , view.getPaddingRight()
                 , view.getPaddingBottom());
+
     }
 
 }

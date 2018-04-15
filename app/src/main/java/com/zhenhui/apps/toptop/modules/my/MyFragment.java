@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 
 import com.zhenhui.apps.toptop.modules.app.AppComponent;
 import com.zhenhui.apps.toptop.R;
-import com.zhenhui.apps.toptop.data.api.ApiServiceModule;
 import com.zhenhui.apps.toptop.databinding.FragmentMyBinding;
 import com.zhenhui.apps.toptop.model.User;
 import com.zhenhui.apps.toptop.model.UserSetting;
@@ -35,7 +34,11 @@ public class MyFragment extends AbstractFragment implements MyView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_my, container, false);
+        View view = inflater.inflate(R.layout.fragment_my, container, false);
+
+        mDataBinding = DataBindingUtil.bind(view);
+
+        return view;
     }
 
     @Override
@@ -54,18 +57,16 @@ public class MyFragment extends AbstractFragment implements MyView {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mDataBinding = DataBindingUtil.bind(view);
-
         UserSetting setting = appComponent.getUserSetting();
-        mDataBinding.setUser(setting.getUser());
+        mDataBinding.setUser(setting.currUser());
         mDataBinding.setEvent(new EventListener() {
             @Override
             public void onAuthClick(View view) {
                 UserSetting setting = appComponent.getUserSetting();
-                User currUser = setting.getUser();
+                User currUser = setting.currUser();
                 if (currUser.getId() != null && currUser.getId() > 0) {
                     Intent intent = new Intent(getActivity(), ProfileActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent, 2);
                 } else {
                     Intent intent = new Intent(getActivity(), AuthActivity.class);
                     startActivityForResult(intent, 1);
@@ -85,23 +86,22 @@ public class MyFragment extends AbstractFragment implements MyView {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == 1 && resultCode == RESULT_OK) {
-            ApiServiceModule.TOKEN = data.getStringExtra("token");
-            UserSetting setting = appComponent.getUserSetting();
-            setting.setToken(ApiServiceModule.TOKEN);
-            mPresenter.reloadUserInfo();
+            mPresenter.reloadUserInfo(data.getStringExtra("token"));
+        }
+
+        if (requestCode == 2 && resultCode == RESULT_OK) {
+            renderUserInfo(null);
         }
 
     }
 
     @Override
-    public void resetUserInfo(User user) {
-        if (user != null) {
-            appComponent.getUserSetting().setUser(user);
-        }
-
+    public void renderUserInfo(User user) {
         mDataBinding.setUser(user);
     }
 }
+
+
 
 
 

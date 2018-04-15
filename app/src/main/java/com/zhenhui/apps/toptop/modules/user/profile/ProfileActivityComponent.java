@@ -11,6 +11,8 @@ public interface ProfileActivityComponent {
 
     void inject(ProfileActivity activity);
 
+    ProfilePresenter presenter();
+
 }
 
 

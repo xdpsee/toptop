@@ -21,15 +21,11 @@ public class UserSetting implements Serializable {
         this.sharedPreferences = sharedPreferences;
     }
 
-    public String getToken() {
+    public String currToken() {
         return sharedPreferences.getString("token", null);
     }
 
-    public void setToken(String token) {
-        sharedPreferences.edit().putString("token", token).apply();
-    }
-
-    public User getUser() {
+    public User currUser() {
         String value = sharedPreferences.getString("user", null);
         User user = JSONUtil.fromJsonString(value, new TypeReference<User>() {
         });
@@ -41,9 +37,16 @@ public class UserSetting implements Serializable {
         return user;
     }
 
-    public void setUser(User user) {
+    public void saveUser(String token, User user) {
+        sharedPreferences.edit().putString("token", token).apply();
         sharedPreferences.edit().putString("user", JSONUtil.toJsonString(user)).apply();
     }
+
+    public void clearUser() {
+        sharedPreferences.edit().putString("token", "").apply();
+        sharedPreferences.edit().putString("user", "").apply();
+    }
+
 }
 
 

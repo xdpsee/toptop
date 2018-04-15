@@ -3,6 +3,7 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="QMUI.Compat.NoActionBar">
         <!-- 配置Android提供的theme -->
+        <item name="android:fitsSystemWindows">false</item>
         <item name="android:textAppearanceListItemSmall">@style/QDTextAppearanceListItemSmall</item>
         <item name="android:textAppearanceListItem">@style/QDTextAppearanceListItem</item>
         <item name="android:listPreferredItemHeight">?attr/qmui_list_item_height_higher</item>
