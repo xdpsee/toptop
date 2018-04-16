@@ -31,7 +31,8 @@ public class AppApplication extends Application {
         ApiServiceModule.TOKEN = setting.currToken();
 
         Toasty.Config.getInstance()
-                .setTextColor(Color.GREEN)
+                .setTextColor(Color.WHITE)
+                .setErrorColor(Color.argb(80, 20,20,20))
                 .apply();
     }
 

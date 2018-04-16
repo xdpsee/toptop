@@ -1,5 +1,9 @@
 package com.zhenhui.apps.toptop.modules.user.boot;
 
+import android.content.Intent;
+
+import com.zhenhui.apps.toptop.data.api.request.SocialSignin;
+import com.zhenhui.apps.toptop.model.SocialType;
 import com.zhenhui.apps.toptop.modules.app.AppComponent;
 import com.zhenhui.apps.toptop.model.Result;
 
@@ -54,7 +58,35 @@ public class AuthPresenter {
         });
     }
 
-    public void loginWithWeibo(String uid, String accessToken) {
+    public void loginWithWeibo(long uid, String accessToken) {
+
+        mView.showProgressStatus();
+        appComponent.getUserService().loginSocial(new SocialSignin(SocialType.WEIBO, uid, accessToken))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<Result<String>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mView.hideProgressStatus();
+                mView.showErrorMessage("网络异常");
+            }
+
+            @Override
+            public void onNext(Result<String> result) {
+                mView.hideProgressStatus();
+                if (result.getError() == 0) {
+                    final String token = result.getData();
+                    mView.loginWeiboSuccess(token);
+
+                } else {
+                    mView.showErrorMessage(result.getMessage());
+                }
+            }
+        });
 
     }
 

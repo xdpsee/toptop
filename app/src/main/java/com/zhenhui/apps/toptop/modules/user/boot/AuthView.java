@@ -11,5 +11,8 @@ public interface AuthView {
     void startLoginActivity(String phone);
 
     void startRegistryActivity();
+
+    void loginWeiboSuccess(String token);
+
 }
 

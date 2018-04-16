@@ -97,7 +97,7 @@ public class AuthActivity extends AbstractActivity implements AuthView {
             @Override
             public void onSuccess(Oauth2AccessToken oauth2AccessToken) {
                 AuthActivity.this.runOnUiThread(() -> {
-                    mPresenter.loginWithWeibo(oauth2AccessToken.getUid(), oauth2AccessToken.getToken());
+                    mPresenter.loginWithWeibo(Long.parseLong(oauth2AccessToken.getUid()), oauth2AccessToken.getToken());
                 });
             }
 
@@ -163,6 +163,17 @@ public class AuthActivity extends AbstractActivity implements AuthView {
     @Override
     public void startRegistryActivity() {
 
+    }
+
+    @Override
+    public void loginWeiboSuccess(String token) {
+
+        Intent intent = new Intent();
+        intent.putExtra("token", token);
+
+        setResult(RESULT_OK, intent);
+
+        finish();
     }
 
     @Override

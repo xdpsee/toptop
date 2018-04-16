@@ -4,18 +4,17 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.TextView;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
-import com.qmuiteam.qmui.widget.QMUILoadingView;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
-import com.zhenhui.apps.toptop.modules.app.AppComponent;
 import com.zhenhui.apps.toptop.R;
-import com.zhenhui.apps.toptop.databinding.ActivityProfileBinding;
 import com.zhenhui.apps.toptop.base.activity.AbstractActivity;
+import com.zhenhui.apps.toptop.databinding.ActivityProfileBinding;
+import com.zhenhui.apps.toptop.modules.app.AppComponent;
 
 import javax.inject.Inject;
 
@@ -60,9 +59,14 @@ public class ProfileActivity extends AbstractActivity implements ProfileView {
 
         QMUICommonListItemView avatarItem = mGroupListView.createItemView("头像");
         avatarItem.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CUSTOM);
-        QMUILoadingView loadingView = new QMUILoadingView(this);
-        avatarItem.addAccessoryCustomView(loadingView);
-        avatarItem.setMinimumHeight(120);
+
+        ImageView imageView = new ImageView(this);
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(80, 80);
+        imageView.setLayoutParams(layoutParams);
+        imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_default_avatar));
+
+        avatarItem.addAccessoryCustomView(imageView);
+        avatarItem.setMinimumHeight(200);
 
 
         QMUICommonListItemView nicknameItem = mGroupListView.createItemView("昵称");
@@ -91,10 +95,6 @@ public class ProfileActivity extends AbstractActivity implements ProfileView {
         weiboItem.setOrientation(QMUICommonListItemView.HORIZONTAL);
         weiboItem.setDetailText("解除绑定");
 
-
-        QMUICommonListItemView logoutItem = mGroupListView.createItemView("退出账户");
-        logoutItem.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,10 +119,6 @@ public class ProfileActivity extends AbstractActivity implements ProfileView {
                 .addItemView(qqItem, onClickListener)
                 .addItemView(weiboItem, onClickListener)
                 .setTitle("社交账号绑定")
-                .addTo(mGroupListView);
-
-        QMUIGroupListView.newSection(this)
-                .addItemView(logoutItem, mDataBinding.getEvent()::onLogout)
                 .addTo(mGroupListView);
 
 

@@ -2,12 +2,14 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="paddingTop"
             type="java.lang.Integer" />
+
         <variable
             name="event"
-            type="com.zhenhui.apps.toptop.modules.user.profile.ProfileActivity.EventListener"/>
+            type="com.zhenhui.apps.toptop.modules.user.profile.ProfileActivity.EventListener" />
     </data>
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -24,17 +26,18 @@
             android:background="@color/colorPrimaryDark"
             android:paddingTop="@{paddingTop}"
             app:layout_constraintTop_toTopOf="@+id/profile_root_layout">
+
             <ImageView
                 android:id="@+id/buttonBack"
                 android:layout_width="32dp"
                 android:layout_height="?android:actionBarSize"
-                android:layout_margin="10dp"
                 android:layout_alignParentLeft="true"
+                android:layout_margin="10dp"
+                android:background="@drawable/ripple_background"
+                android:onClick="@{event.onBack}"
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_chevron_left_48dp"
-                android:tint="@color/white"
-                android:background="@drawable/ripple_background"
-                android:onClick="@{event.onBack}" />
+                android:tint="@color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -51,13 +54,38 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/topBar"
-            android:background="@color/qmui_config_color_background">
+            android:background="@color/qmui_config_color_background"
+            app:layout_constraintTop_toBottomOf="@+id/topBar">
 
-            <com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView
-                android:id="@+id/groupListView"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView
+                    android:id="@+id/groupListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="退出账号"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:onClick="@{event.onLogout}"
+                    app:qmui_backgroundColor="@color/qmui_config_color_red"
+                    app:qmui_radius="4dp"
+                    app:qmui_borderColor="@android:color/darker_gray"
+                    />
+
+
+            </LinearLayout>
+
+
         </ScrollView>
 
 
